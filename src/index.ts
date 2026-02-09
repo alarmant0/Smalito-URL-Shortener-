@@ -1,20 +1,36 @@
+import { handleApiRequest } from "./routes/api";
+import { messageRequests } from "./routes/message";
+
+
 export default {
-	/**
-	 * This is the standard fetch handler for a Cloudflare Worker
-	 *
-	 * @param request - The request submitted to the Worker from the client
-	 * @param env - The interface to reference bindings declared in wrangler.jsonc
-	 * @param ctx - The execution context of the Worker
-	 * @returns The response to be sent back to the client
-	 */
-	async fetch(request, env, ctx): Promise<Response> {
-		// console.log(request);
-		let endpoint = request.url.split("/")[3]
-		if ( endpoint !== "" ) {
-			return Response.redirect("https://example.com", 302);
-		}
-		let value = await env.urls.get("test");
-		console.log(value);
-		return new Response(value);
-	},
+  async fetch(request, env): Promise<Response> {
+    const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api")) {
+      return handleApiRequest(request);
+    }
+    if (url.pathname.startsWith("/message")) {
+      return messageRequests(request);
+    }
+
+    let filename = url.pathname;
+    if (filename === "/") {
+      filename = "/index.html";
+    } 
+
+    const assetUrl = new URL(filename, request.url);
+
+    const assetRequest = new Request(assetUrl.toString(), {
+      method: "GET",
+      headers: request.headers,
+    });
+
+    const response = await env.ASSETS.fetch(assetRequest);
+
+    if (response.status === 404) {
+      return new Response("Not Found", { status: 404 });
+    }
+
+    return response;
+  },
 } satisfies ExportedHandler<Env>;
