@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../assets/js/getURL.js"></script>
 </head>
 <body>
   <div class="glow"></div>
@@ -20,7 +21,7 @@
       <form>
         <div class="field">
           <label>Long URL</label>
-          <input placeholder="https://example.com/very/long/link" />
+          <input placeholder="https://example.com/very/long/link" id="ph1"/>
         </div>
 
         <div class="advanced" id="advanced">
@@ -35,7 +36,7 @@
         </div>
 
         <div class="actions">
-          <button type="button">Shorten link</button>
+          <button type="button" onclick="getTinyURL()">Shorten link</button>
         </div>
 
         <div class="result" id="result">

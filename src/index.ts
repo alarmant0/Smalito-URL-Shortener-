@@ -1,13 +1,11 @@
 import { handleApiRequest } from "./routes/api";
-import { messageRequests } from "./routes/message";
-
 
 export default {
   async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname.startsWith("/api")) {
-      return handleApiRequest(request);
+      return handleApiRequest(request, env);
     }
     let filename = url.pathname;
     if (filename === "/") {
