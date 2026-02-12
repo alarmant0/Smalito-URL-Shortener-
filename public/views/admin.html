@@ -8,51 +8,57 @@
   <link rel="stylesheet" href="../assets/css/admin.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="icon" href="./assets/images/smalito.png" type="image/png">
-  <script src="../assets/js/admin.js" defer></script>
+  <link rel="icon" href="../assets/images/smalito.png" type="image/png">
 </head>
 
 <body>
 
 <header class="topbar">
   <div class="brand">
-    <img src="./assets/images/smalito.png" />
+    <img src="../assets/images/smalito.png" />
     <span>Smalito Admin</span>
   </div>
-  <button class="logout">Logout</button>
+  <div class="top-actions">
+    <button class="ghost-btn">Dashboard</button>
+    <button class="logout">Logout</button>
+  </div>
 </header>
 
-<main>
+<main class="container">
 
-  <!-- Stats -->
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <p>Manage and monitor your shortened links.</p>
+  </div>
+
   <section class="stats">
-    <div class="card">
-      <h3>Total Links</h3>
-      <p id="totalLinks">0</p>
+    <div class="stat-card">
+      <div class="stat-title">Total Links</div>
+      <div class="stat-value" id="totalLinks">0</div>
     </div>
-
-    <div class="card">
-      <h3>Total Clicks</h3>
-      <p id="totalClicks">0</p>
+    <div class="stat-card">
+      <div class="stat-title">Total Clicks</div>
+      <div class="stat-value" id="totalClicks">0</div>
     </div>
-
-    <div class="card">
-      <h3>Today</h3>
-      <p id="todayClicks">0</p>
+    <div class="stat-card">
+      <div class="stat-title">Clicks Today</div>
+      <div class="stat-value" id="todayClicks">0</div>
     </div>
   </section>
 
-  <!-- Search -->
   <section class="search">
-    <input type="text" id="searchInput" placeholder="Search by code or URL..." />
+    <input type="text" id="searchInput" placeholder="Search by short code or URL..." />
   </section>
 
-  <!-- Table -->
+  <section class="bulk-actions" style="margin-bottom: 10px;">
+    <button id="deleteSelectedBtn" class="delete">Delete Selected</button>
+  </section>
+
   <section class="table-container">
     <table>
       <thead>
         <tr>
+          <th><input type="checkbox" id="selectAll" /></th>
           <th>Short Code</th>
           <th>Full URL</th>
           <th>Clicks</th>
@@ -61,12 +67,12 @@
         </tr>
       </thead>
       <tbody id="linksTable">
-        <!-- JS inserts rows -->
       </tbody>
     </table>
   </section>
 
 </main>
 
+<script src="../assets/js/13085629-bda9-4d72-af37-12500d368f19.js" defer></script>
 </body>
 </html>

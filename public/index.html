@@ -6,33 +6,45 @@
   <title>Smalito – URL Shortener</title>
 
   <link rel="stylesheet" href="./assets/css/styles.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <script src="./assets/js/getURL.js" defer></script>
   <link rel="icon" href="./assets/images/smalito.png" type="image/png">
+
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script src="./assets/js/getURL.js" defer></script>
+  <script src="./assets/js/main.js" defer></script>
 </head>
 
 <body>
-  <div class="glow"></div>
+  <div class="background-gradient"></div>
 
-  <main>
+  <button id="themeToggle" class="theme-toggle">🌙</button>
 
-    <div class="brand">
-      <img src="./assets/images/smalito.png" alt="Smalito Logo">
-      <span>Smalito</span>
+  <main class="container">
+    <div class="hero">
+      <div class="brand">
+        <img src="./assets/images/smalito.png" alt="Smalito Logo">
+        <span>Smalito</span>
+      </div>
+
+      <h1>
+        Shorten your links.<br>
+        <span class="gradient-text">Simplify your sharing.</span>
+      </h1>
+
+      <p class="subtitle">
+        Fast, minimal and reliable URL shortening built for modern workflows.
+      </p>
     </div>
 
-    <h1>Shorten your links</h1>
-    <p class="subtitle">Simple. Fast. Reliable.</p>
-
     <div class="card">
-      <form onsubmit="event.preventDefault(); getTinyURL();">
-
+      <form id="shortenForm">
         <div class="field">
           <label>Long URL</label>
-          <input 
+          <input
             id="ph1"
             placeholder="https://example.com/very/long/link"
             required
@@ -42,7 +54,7 @@
         <div class="advanced" id="advanced">
           <div class="field">
             <label>Custom short code (optional)</label>
-            <input 
+            <input
               id="ph2"
               placeholder="myLink"
               maxlength="8"
@@ -50,35 +62,46 @@
           </div>
         </div>
 
-        <div class="toggle" onclick="toggleAdvanced()">
-          Advanced options
+        <div class="toggle" id="advancedToggle">Advanced options</div>
+
+        <div class="turnstile-wrap">
+          <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAACaxj37FguiUF4w3"
+            data-callback="onTurnstileSuccess"
+            data-expired-callback="onTurnstileExpired"
+            data-error-callback="onTurnstileError"
+          ></div>
         </div>
 
-        <div class="actions">
-          <button id="submitBtn" type="submit">
-            Shorten Link
-          </button>
-        </div>
+        <input type="hidden" id="turnstileToken" name="turnstileToken" />
+
+        <button id="submitBtn" type="submit">Shorten Link →</button>
 
         <div class="result" id="result">
           <input id="shortResult" readonly />
-          <button type="button" onclick="copyToClipboard()">
-            Copy
-          </button>
+          <button type="button" id="copyBtn">Copy</button>
         </div>
-
       </form>
     </div>
 
     <div class="footer">
-      © 2026 Smalito. All rights reserved.
+      © 2026 Smalito. Built with simplicity.
     </div>
-
   </main>
 
   <script>
-    function toggleAdvanced() {
-      document.getElementById("advanced").classList.toggle("open");
+    function onTurnstileSuccess(token) {
+      const out = document.getElementById("turnstileToken");
+      if (out) out.value = token || "";
+    }
+    function onTurnstileExpired() {
+      const out = document.getElementById("turnstileToken");
+      if (out) out.value = "";
+    }
+    function onTurnstileError() {
+      const out = document.getElementById("turnstileToken");
+      if (out) out.value = "";
     }
   </script>
 </body>

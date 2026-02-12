@@ -1,11 +1,13 @@
  Coding:
 
- - Add dark/white mode
- - Add functionality to admin page
- - Improve UI
- - Add dark/white mode
+ - Rate limiter (falta implementar no server side)
+ - Delete links
  - Add accounts (google log in option)
  - Redirect from http -> https
+ - Add Ads to the site
+ - Remove hardcoded secrets
+ - Clean code
+ - Get all links
 
 
  Security:
@@ -14,6 +16,8 @@
   - XSS
   - IDOR
   - Cryptographic function for code gen
+  - Change uuid v4
+  - Add http methods to ifs
 
  Random:
 

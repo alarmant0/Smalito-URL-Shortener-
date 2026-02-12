@@ -6,9 +6,7 @@ const ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 export async function createTinyURL(url: string, code: string, env: Env): Promise<string> {
     let small_url;
     if ( code !== "" ) {
-        const full_url = "https://smalito.com/" + code;
-        let code_available = await isAvailable(full_url, env);
-        console.log(code_available);
+        let code_available = await isAvailable(code, env);
         if (code_available !== null) {
             return "Error";
         } else {
@@ -21,9 +19,8 @@ export async function createTinyURL(url: string, code: string, env: Env): Promis
         small_url = "";
         for (let i=0 ;i <= 7 ; i++) {
             small_url+=getRandomLetter();
-        }
-        console.log(small_url);
-        let available = await isAvailable(small_url, env); // change this
+            }
+        let available = await isAvailable(small_url, env);
         if (available === null) {
             break;
         }
@@ -36,6 +33,6 @@ function getRandomIndex(max: number): number { // implement actually random num 
     return Math.floor(Math.random() * max) + 1;
 }
 
-function getRandomLetter(): string {
+function getRandomLetter(): string { // I can put this on the utils.ts
     return ALPHABET.charAt(getRandomIndex(ALPHABET.length));
 }
