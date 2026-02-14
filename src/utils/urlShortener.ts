@@ -1,5 +1,5 @@
-import { isAvailable } from "../services/controller.ts";
-import { cput } from "../services/controller.ts";
+import { isAvailable } from "@/services/kv/kv_controller";
+import { cput } from "@/services/kv/kv_controller";
 
 const ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 

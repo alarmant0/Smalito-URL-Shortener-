@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smalito – Sign up</title>
 
-  <link rel="stylesheet" href="./assets/css/signup.css" />
+  <link rel="stylesheet" href="/assets/css/signup.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
+  <script src="/assets/js/signup.js" defer></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <link rel="icon" href="./assets/images/smalito.png" type="image/png">
+  <link rel="icon" href="/assets/images/smalito.png" type="image/png">
 </head>
 
 <body>
@@ -21,7 +22,7 @@
 
   <header class="topbar">
     <a class="logo" href="/">
-      <img src="./assets/images/smalito.png" alt="Smalito">
+      <img src="/assets/images/smalito.png" alt="Smalito">
       <span>Smalito</span>
     </a>
 
@@ -115,6 +116,7 @@
     (function () {
       const themeBtn = document.getElementById("themeToggle");
       const savedTheme = localStorage.getItem("theme");
+
       if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
         document.body.classList.add("dark-mode");
       }
@@ -124,34 +126,6 @@
         document.body.classList.toggle("dark-mode");
         localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
         themeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
-      });
-
-      const pw = document.getElementById("password");
-      const pwToggle = document.getElementById("pwToggle");
-      pwToggle.addEventListener("click", () => {
-        const isPw = pw.type === "password";
-        pw.type = isPw ? "text" : "password";
-        pwToggle.textContent = isPw ? "Hide" : "Show";
-      });
-
-      const email = document.getElementById("email");
-      const emailMsg = document.getElementById("emailMsg");
-      const setEmailError = (msg) => {
-        emailMsg.textContent = msg || "";
-        emailMsg.classList.toggle("show", !!msg);
-        email.classList.toggle("invalid", !!msg);
-      };
-
-      email.addEventListener("input", () => setEmailError(""));
-
-      document.getElementById("signupForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const value = email.value.trim();
-        if (!value || !value.includes("@")) {
-          setEmailError("Please enter a valid email address.");
-          return;
-        }
-        alert("Signup UI ready. Next step: connect to your API.");
       });
 
       const GOOGLE_CLIENT_ID = "965314062049-gu023p97ugacvn4sdvbsk8tisbr0a8r2.apps.googleusercontent.com";

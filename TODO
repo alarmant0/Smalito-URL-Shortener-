@@ -1,12 +1,22 @@
  Coding:
 
  - Add accounts (google log in option)
+ - Create sign ups and logins
+ - Check the response from a sign up
  // ATE HOJE
  - Create js files for dashboard and signup
  - Clean code
+ - Finish R2 implementation
  - Add Ads to the site
  - Remove hardcoded secrets
  - Maybe implementar um R2
+ - Add email verification (when creating account)
+ - See Cloudflare Hyperdrive
+ - Add custom alerts boxes or just text (invalid url for example)
+ - Add a waiting page while the user is logging in via google
+ - Split utils.ts into validators.ts and crypto.ts
+ - Update my tsconfig.json to use ts path aliases
+ - Fix admin.ts (error on parsin json)
 
  Security:
 
@@ -16,6 +26,8 @@
   - Cryptographic function for code gen
   - Change uuid v4
   - Add http methods to ifs
+  - Block Ips that are rate limited
+  - Add hashing to passwords
 
  Random:
 

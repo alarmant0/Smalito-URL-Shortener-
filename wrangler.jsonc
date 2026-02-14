@@ -4,6 +4,7 @@
 	"main": "src/index.ts",
 	"compatibility_date": "2026-02-05",
 	"preview_urls": false,
+	"workers_dev": true,
 	"ratelimits": [
 		{
 			"name": "RATE_LIMITER",
@@ -14,12 +15,18 @@
 			}
 		}
 	],
+	"r2_buckets": [
+		{
+			"binding": "STORAGE",
+			"bucket_name": "smalito-storage"
+		}
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",
 			"database_name": "users-db",
 			"database_id": "cbe29c7a-2966-4abe-b062-9a083f338b55"
-		}
+		} // I can use remote
 	],
 	"vars": {
 		"GOOGLE_CLIENT_ID": "965314062049-gu023p97ugacvn4sdvbsk8tisbr0a8r2.apps.googleusercontent.com"
@@ -38,13 +45,11 @@
 	"kv_namespaces": [
 		{
 			"binding": "URLS",
-			"id": "22db0033fdb24db1af26ae018fa9fe1b",
-			"remote": true
+			"id": "22db0033fdb24db1af26ae018fa9fe1b"
 		},
 		{
 			"binding": "BLOCKED_IPS",
-			"id": "ba9bf67f7ebd42eb92533da5fa6e2e7b",
-			"remote": true
+			"id": "ba9bf67f7ebd42eb92533da5fa6e2e7b"
 		}
 	]
 }

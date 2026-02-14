@@ -36,7 +36,7 @@ export async function handleAdminRequest(request: Request, env: Env): Promise<Re
 	    });
     }
     else {
-	    const file = "/views/admin.html";
+	    const file = "/pages/admin.html"; // change this to assets if on index.ts
 	    const assetUrl = new URL(file, request.url);
 
 	    const assetRequest = new Request(assetUrl.toString(), {

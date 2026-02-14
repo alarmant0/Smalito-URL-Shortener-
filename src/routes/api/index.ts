@@ -1,15 +1,19 @@
-import { createTinyURL } from "../utils/shortener.ts";
-import { verifyTurnstile } from "../utils/verifyTurnstile.ts";
-import { handleGoogleOAuth } from "./googleOAuth.ts";
+import { createTinyURL } from "@/utils/urlShortener";
+import { verifyTurnstile } from "@/utils/verifyTurnstile";
+import { handleGoogleOAuth } from "@/routes/api/googleOAuth";
+import { createUser } from "@/routes/users/user";
 
 export async function handleApiRequest(request: Request, env: Env): Promise<Response> {
 
     const url = new URL(request.url);
     const endpoint = url.pathname.split("/")[2];
-    console.log(url)
+    // console.log(url)
     const full_pathname = url.pathname;
     if (full_pathname === "/api/auth/google") {
         return handleGoogleOAuth(request, env);
+    }
+    if (full_pathname === "/api/user/create") {
+        return createUser(request, env);
     }
     if (endpoint == "status") {
         return new Response(

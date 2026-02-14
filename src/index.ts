@@ -1,7 +1,7 @@
-import { handleApiRequest } from "./routes/api";
-import { isValidShortCode } from "./utils/utils";
-import { isAvailable } from "./services/controller";
-import { handleAdminRequest } from "./routes/admin"
+import { handleApiRequest } from "@/routes/api/index";
+import { isValidShortCode } from "@/utils/codeValidator";
+import { isAvailable } from "@/services/kv/kv_controller";
+import { handleAdminRequest } from "@/routes/users/admin"
 
 
 export default {
@@ -42,15 +42,15 @@ export default {
     // ASSETS LOGIC
     switch("PATH: ", pathname) {
       case "/": {
-        pathname = "index.html";
+        pathname = "/pages/index.html";
         break;
       }
       case "/signup": {
-        pathname = "views/signup.html";
+        pathname = "/pages/signup.html";
         break;
       }
     case "/dashboard": {
-      pathname = "views/dashboard.html";
+      pathname = "/pages/dashboard.html";
       break;
     }
       default: {
