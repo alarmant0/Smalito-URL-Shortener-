@@ -1,111 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smalito – URL Shortener</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smalito - Encurtador Moderno</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="icon" href="/assets/images/smalito.png" type="image/png">
-
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  <script src="/assets/js/getURL.js" defer></script>
-  <script src="/assets/js/scripts.js" defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-
 <body>
-  <div class="background-gradient"></div>
 
-  <button id="themeToggle" class="theme-toggle">🌙</button>
+    <div id="toast-container" class="toast-container"></div>
 
-  <main class="container">
-    <div class="hero">
-      <div class="brand">
-        <img src="/assets/images/smalito.png" alt="Smalito Logo">
-        <span>Smalito</span>
-      </div>
+    <div class="ambient-light"></div>
+    <div class="floating-symbols" id="symbolsContainer"></div>
 
-      <h1>
-        Shorten your links.<br>
-        <span class="gradient-text">Simplify your sharing.</span>
-      </h1>
+    <nav>
+        <div class="logo">
+            <img src="../assets/images/favicon.ico" alt="Smalito Icon" class="logo-icon">
+            <span class="logo-text">Smalito</span>
+        </div>
+        
+        <div class="nav-actions">
+            <a href="login.html" class="nav-link">Log In</a>
+            <a href="signup.html" class="nav-btn-signup">Sign Up</a>
 
-      <p class="subtitle">
-        Fast, minimal and reliable URL shortening built for modern workflows.
-      </p>
-      <div class="cta-row">
-        <a class="btn-secondary" href="/signup">Sign up</a>
-      </div>
+            <div class="theme-switch" id="themeToggle" title="Mudar Tema">
+                <div class="switch-circle">
+                    <svg class="icon-svg moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg class="icon-svg sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <h1>
+            Shorten your links.<br>
+            <span class="gradient-text-wrapper" id="rotatingText"></span>
+        </h1>
+
+        <p class="subtitle">
+            The all-in-one platform for your links. Safe, fast, and packed with powerful analytics.
+        </p>
+
+        <div class="glass-card">
+            <form id="shortenForm" novalidate>
+                <div class="input-group">
+                    <label class="input-label" for="ph1">Paste your long URL</label>
+                    <input type="text" id="ph1" class="custom-input" placeholder="https://example.com/very-long-url...">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" for="ph2">Custom alias (optional)</label>
+                    <input type="text" id="ph2" class="custom-input" placeholder="my-link" maxlength="8">
+                </div>
+
+                <div class="turnstile-wrapper">
+                    <div id="turnstile-widget"></div> 
+                </div>
+                <input type="hidden" id="turnstileToken" name="turnstileToken" />
+
+                <button type="submit" id="submitBtn" class="btn-action">
+                    ✨ Shorten Now &rarr;
+                </button>
+            </form>
+
+            <div id="resultContainer" class="result-container" style="display: none;">
+                <div class="divider"></div>
+                <label class="input-label">Your Short Link:</label>
+                <div class="result-box">
+                    <input type="text" id="shortResult" class="custom-input result-input" readonly>
+                    <button type="button" id="copyBtn" class="btn-copy" title="Copy">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="marquee-container">
+         <div class="marquee-track">
+            <div class="pill">🌍 Geo Targeting</div>
+            <div class="pill">⚡ Fast Redirects</div>
+            <div class="pill">📊 Advanced Analytics</div>
+            <div class="pill">🔒 HTTPS Secure</div>
+            <div class="pill">🔌 API Access</div>
+            
+            <div class="pill">🌍 Geo Targeting</div>
+            <div class="pill">⚡ Fast Redirects</div>
+            <div class="pill">📊 Advanced Analytics</div>
+            <div class="pill">🔒 HTTPS Secure</div>
+            <div class="pill">🔌 API Access</div>
+
+            <div class="pill">🌍 Geo Targeting</div>
+            <div class="pill">⚡ Fast Redirects</div>
+            <div class="pill">📊 Advanced Analytics</div>
+            <div class="pill">🔒 HTTPS Secure</div>
+            <div class="pill">🔌 API Access</div>
+        </div>
     </div>
 
-    <div class="card">
-      <form id="shortenForm">
-        <div class="field">
-          <label>Long URL</label>
-          <input
-            id="ph1"
-            placeholder="https://example.com/very/long/link"
-            required
-          />
-        </div>
-
-        <div class="advanced" id="advanced">
-          <div class="field">
-            <label>Custom short code (optional)</label>
-            <input
-              id="ph2"
-              placeholder="myLink"
-              maxlength="8"
-            />
-          </div>
-        </div>
-
-        <div class="toggle" id="advancedToggle">Advanced options</div>
-
-        <div class="turnstile-wrap">
-          <div
-            class="cf-turnstile"
-            data-sitekey="0x4AAAAAACaxj37FguiUF4w3"
-            data-callback="onTurnstileSuccess"
-            data-expired-callback="onTurnstileExpired"
-            data-error-callback="onTurnstileError"
-          ></div>
-        </div>
-
-        <input type="hidden" id="turnstileToken" name="turnstileToken" />
-
-        <button id="submitBtn" type="submit">Shorten Link →</button>
-
-        <div class="result" id="result">
-          <input id="shortResult" readonly />
-          <button type="button" id="copyBtn">Copy</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="footer">
-      © 2026 Smalito. Built with simplicity.
-    </div>
-  </main>
-
-  <script>
-    function onTurnstileSuccess(token) {
-      const out = document.getElementById("turnstileToken");
-      if (out) out.value = token || "";
-    }
-    function onTurnstileExpired() {
-      const out = document.getElementById("turnstileToken");
-      if (out) out.value = "";
-    }
-    function onTurnstileError() {
-      const out = document.getElementById("turnstileToken");
-      if (out) out.value = "";
-    }
-  </script>
+    <script src="../assets/js/scripts.js"></script>
 </body>
 </html>
