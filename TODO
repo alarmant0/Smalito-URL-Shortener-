@@ -1,14 +1,15 @@
  Coding:
 
+ - ACABAR O LOGIN TOTALMENTE
+
+ 
  - Add accounts (google log in option)
  - Create sign ups and logins
  - Check the response from a sign up
- // ATE HOJE
  - Create js files for dashboard and signup
  - Clean code
  - Finish R2 implementation
  - Add Ads to the site
- - Maybe implementar um R2
  - Add email verification (when creating account)
  - See Cloudflare Hyperdrive
  - Add custom alerts boxes or just text (invalid url for example)

@@ -30,7 +30,7 @@ export default {
     }
     // Code logic
     const code = pathname.slice(1).trim()
-    if (isValidShortCode(code) && pathname !== "/signup") { // change this
+    if (isValidShortCode(code) && pathname !== "/signup" && pathname !== "/login") { // change this
       const j_obj_raw = await isAvailable(code, env)
       const j_obj = typeof j_obj_raw === "string" ? JSON.parse(j_obj_raw) : j_obj_raw
       const { full_url } = j_obj
@@ -51,6 +51,11 @@ export default {
       }
     case "/dashboard": {
       pathname = "/pages/dashboard.html";
+      break;
+    }
+    case "/login": {
+      console.log("asdsa");
+      pathname = "/pages/login.html";
       break;
     }
       default: {

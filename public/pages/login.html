@@ -1,0 +1,119 @@
+<!-- public/pages/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smalito – Log in</title>
+
+  <link rel="stylesheet" href="/assets/css/login.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="/assets/js/login.js" defer></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <link rel="icon" href="/assets/images/smalito.png" type="image/png">
+</head>
+
+<body>
+  <div class="bg"></div>
+
+  <header class="topbar">
+    <a class="logo" href="/">
+      <img src="/assets/images/smalito.png" alt="Smalito">
+      <span>Smalito</span>
+    </a>
+
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </header>
+
+  <main class="auth">
+    <div class="auth-wrap">
+      <section class="left">
+        <h1>Welcome back</h1>
+        <p class="subline">
+          New here? <a href="/signup">Create an account</a>
+        </p>
+
+        <div id="googleBtnWrap" class="google-wrap"></div>
+
+        <div class="divider">
+          <span></span><p>OR</p><span></span>
+        </div>
+
+        <form id="loginForm" class="card">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            <div class="field-msg" id="emailMsg"></div>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="pwrow">
+              <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required />
+              <button class="pw-toggle" type="button" id="pwToggle">Show</button>
+            </div>
+
+            <div class="hint-row">
+              <a class="hint-link" href="/forgot">Forgot password?</a>
+            </div>
+          </div>
+
+          <button class="btn primary" id="loginBtn" type="submit">Sign in</button>
+
+          <p class="legal">
+            By signing in, you agree to Smalito’s
+            <a href="/terms" rel="nofollow">Terms</a>,
+            <a href="/privacy" rel="nofollow">Privacy</a>,
+            and <a href="/acceptable-use" rel="nofollow">Acceptable Use</a>.
+          </p>
+        </form>
+
+        <a class="back" href="/">← Back to shortener</a>
+      </section>
+
+      <section class="right" aria-hidden="true">
+        <div class="promo">
+          <div class="illustration">
+            <div class="phone">
+              <div class="phone-top">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+
+              <div class="pill">
+                <span class="pill-dot"></span>
+                <span>smal.to/creator</span>
+              </div>
+
+              <div class="phone-mid">
+                <div class="qr"></div>
+                <div class="lines">
+                  <div class="ln w80"></div>
+                  <div class="ln w65"></div>
+                  <div class="ln w90"></div>
+                </div>
+              </div>
+
+              <div class="cta">
+                <div class="cta-btn"></div>
+                <div class="cta-btn ghost"></div>
+              </div>
+            </div>
+
+            <div class="blob"></div>
+          </div>
+
+          <h2>Pick up where you left off.</h2>
+          <p>View your links, track clicks, and manage campaigns — all in one place.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
